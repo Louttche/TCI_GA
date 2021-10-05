@@ -10,3 +10,5 @@ The tool consists of 2 parts:
 This assignment focusses on a part of the server-side code.
 
 
+# UML - Diagram
+![UML]()
