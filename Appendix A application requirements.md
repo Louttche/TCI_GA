@@ -65,7 +65,7 @@ Creating tests and implementation for the behaviour of specific classes at least
 2. Create tests specifications using TestCherry, test code and implementation code which implement the behaviour.
 3. use Git commits to show the order in which you executed all steps.
 4. when asked to create methods, minimize the amount of methods to use. 
-5. The behaviour of those methods is described, and the paramters of these methods can be deduced from other interfaces and classes.
+5. The behaviour of those methods is described, and the parameters of these methods can be deduced from other interfaces and classes.
 6. The application at least should be able to handle synchronous communication.
 7. Do NOT create or add test & code for:
 •	the Course class.

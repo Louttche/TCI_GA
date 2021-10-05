@@ -8,5 +8,9 @@ package model;
  *
  */
 public class StudentExam {
+    //private Student student;
+    //private ExamID exam;
+    //private int classcode; //  are the ECs of the course, e.g., 3
+
     // TODO: the appropiate methods
 }

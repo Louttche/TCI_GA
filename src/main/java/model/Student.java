@@ -11,6 +11,5 @@ public class Student {
     private long studentnumber;
     private Image photo;
 
-    // TODO: the appropiate methods
-
+    // TODO: the appropriate methods
 }

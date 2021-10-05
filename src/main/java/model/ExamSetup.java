@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 /**
  * An examsetup is related to a specific course. it is identified by the course it is related to, and the startdate.
  *
@@ -25,8 +27,14 @@ package model;
  *
  */
 public class ExamSetup {
-    // TODO: the appropiate methods
+    // TODO: the appropriate methods
+    //private Course course;
+    //private List<String> classcodes;
+    //private List<int> examcodes;
+    //private String examname;
 
+    //private String begintime;
+    //private String endtime;
 
-
+    //private ExamID examID;
 }
