@@ -52,8 +52,6 @@ public class CourseTest {
         assertThat(A).hasSameHashCodeAs(B);
     }
 
-
-
     /**
      * @verifies show that logically not-similar courses are not equal
      * @see Course#Course(String, String, int)
@@ -107,7 +105,4 @@ public class CourseTest {
     private static Stream<String> generateCodeWithInvalidSize() {
         return Stream.of("", "A", "AB", "ab", "abcd", "ABCd", "abc", "aBC", "ABCDE", "abcde");
     }
-
-
-
 }

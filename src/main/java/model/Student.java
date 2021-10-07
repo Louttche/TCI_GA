@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * student is an immutable object. it's used for passing around information on students.
@@ -17,9 +18,9 @@ public class Student {
      * @param studentnumber
      * @param photo
      *
-     * @should throw IllegalArgumentException if studentnumber and name combination exists
+     * @should show if student object already exists
      * @should throw NullPointerException if name is null
-     * @should throw NullPointerException if studentnumber is null
+     * @should throw IllegalArgumentException if studentnumber is invalid size
      */
     public Student(String name, long studentnumber, Image photo){
         this.name = name;
@@ -50,4 +51,18 @@ public class Student {
     public void setPhoto(Image photo) {
         this.photo = photo;
     }
+
+    /*@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+
+        return this.name.equals(student.name) && this.studentnumber == student.studentnumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studentnumber);
+    }*/
 }
