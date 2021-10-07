@@ -26,7 +26,7 @@ class StudentTest {
      */
     @Test
     public void Student_shouldThrowNullPointerExceptionIfNameIsNull() throws Exception {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
            new Student(null, VALID_STUDENTNUMBER, VALID_IMAGE);
         });
     }

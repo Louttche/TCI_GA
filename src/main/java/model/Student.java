@@ -23,6 +23,11 @@ public class Student {
      * @should throw IllegalArgumentException if studentnumber is invalid size
      */
     public Student(String name, long studentnumber, Image photo){
+        if (name == null)
+            throw new NullPointerException("Student name cannot be null.");
+        if (Long.toString(studentnumber).length() != 7)
+            throw new IllegalArgumentException("Student number needs to be 7 digits long");
+
         this.name = name;
         this.studentnumber = studentnumber;
         this.photo = photo;
@@ -52,7 +57,7 @@ public class Student {
         this.photo = photo;
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Student)) return false;
@@ -64,5 +69,5 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(studentnumber);
-    }*/
+    }
 }
