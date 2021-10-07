@@ -46,13 +46,11 @@ EFIT internally uses services which contain utility functions to move through th
 3. executing exams (by efit clients and by invigilators), 
 4. accessing exam data (by teachers), 
 5. finalizing exams (by teachers)
-6. cleaning up of data (by data managers). 
-
-
+6. cleaning up of data (by data managers).
 
 
 ##Distribution of work
-Creating tests and implementation for the behaviour of specific classes at least needs to be distributed between the students in a group. Make sure the following rules appy:
+Creating tests and implementation for the behaviour of specific classes at least needs to be distributed between the students in a group. Make sure the following rules apply:
 * pick at least one class which is NOT dependent on other classes
 * pick at least two classes which are dependent on other classes
 * make sure the division of classes is discussed with the teacher when discussing GA1 and written down.
