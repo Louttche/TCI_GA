@@ -21,13 +21,13 @@ students sign up for exams before the exam starts
 during exams students connect to the server using local software (the EFIT client), which logs in into the server, routes network traffic, and monitors the client. 
 At the end of an exam, and sometimes during the exam, the exam work of a student is sent to the server. There is a specific service for handling this communication.
 3 Invigilators
-invigilators are present in class during exams. They recieve an overview of all students in their class, and their connection status. They can add extra time for all students,
+invigilators are present in class during exams. They receive an overview of all students in their class, and their connection status. They can add extra time for all students,
 or for individual students. They also can start and stop exams manually. During exams, invigilators can look at screenshots and computer info of individual students
 whenever fraud is suspected. There is a specific service for handling this communication.
 4 Teachers
 Teachers create exam setups befor the exam date. It consistst of exam info, the amount of classrooms needed, location of exam material, and other information. For each classroom
 needed for the exam, a unique classcode is created. when a student enters a specific exam with a classcode, the invigilant knows the student is in his class, 
-and he will showup on the invigilants screen. The classcode is also shown on the EFIT client. 
+and he will show up on the invigilants screen. The classcode is also shown on the EFIT client. 
 After an exam is finished, a teacher gets access to all information of the exam execution, and the exam work of students can be downloaded.
 There is a specific service for handling this communication.
 5 Data manager

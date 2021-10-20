@@ -1,7 +1,9 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An examsetup is related to a specific course. it is identified by the course it is related to, and the startdate.
@@ -31,28 +33,21 @@ public class ExamSetup {
 
     // Identifiers:
     private Course course;
-    private Date startdate;
+    private LocalDateTime startdate;
 
     private Integer nrOfClasscodesToGenerate;
 
-    private List<String> classcodes; // the classcode consists of the name of the exam, followed by a '-', followed by a random string of 6 characters.
+    private List<String> classcodes;
     private List<Integer> examcodes;
 
-    /*  an examname can be given during creation of an exam. when no name is provided, the examname is taken from the course the exam is for.
-     *  it can always be changed afterwards. an empty examname is not allowed, when this is entered, the name of the course is used instead.
-     */
     private String examname;
 
-    /*  the begintime of the exam (when it is being set), cannot be after the endtime of the exam. otherwise an IllegalDateException is thrown.
-     *  the reverse is true for the endtime.
-     *  instead of an endtime, a begintime + duration in seconds can be given, the endtime is then calculated.
-     */
-    private String begintime;
-    private String endtime;
+    private LocalTime begintime;
+    private LocalTime endtime;
 
     private ExamID examID;
 
-    //exam materials?
+    private String material;
 
     /**
      *
@@ -65,15 +60,14 @@ public class ExamSetup {
      * @param examID
      *
      * @should throw an IllegalDateException if begintime is not before endtime
-     * @should throw an IllegalDateException if endtime is not after begintime
      * @should set the examname to course name if it is empty
      * @should not allow to change examname after exam has started
-     * @should generate classcode with valid format
-     * @should generate extra classcodes with valid format
-     *
+     * @should generate classcodes with valid size
+     * @should always generate at least 2 classcodes when no nrOfClasscodes are given or null
+     * @should throw an ExamNotFoundException when exam materials are added before exam gets created
+     * @should throw an ExamStartedException when exam materials are added after exam starts
      */
-    //should only add exam materials after exam gets created and before it starts
-    public ExamSetup(Course course, Date startdate, Integer nrOfClasscodes, String examname, String begintime, String endtime, ExamID examID){
+    public ExamSetup(Course course, LocalDateTime startdate, Integer nrOfClasscodes, String examname, LocalTime begintime, LocalTime endtime, ExamID examID){
         this.course = course;
         this.startdate = startdate;
         this.nrOfClasscodesToGenerate = nrOfClasscodes;
@@ -115,22 +109,19 @@ public class ExamSetup {
         this.examname = examname;
     }
 
-
-    /*  the begintime of the exam (when it is being set), cannot be after the endtime of the exam. otherwise an IllegalDateException is thrown.
-     *  the reverse is true for the endtime. */
-    public String getBegintime() {
+    public LocalTime getBegintime() {
         return begintime;
     }
 
-    public void setBegintime(String begintime) {
+    public void setBegintime(LocalTime begintime) {
         this.begintime = begintime;
     }
 
-    public String getEndtime() {
+    public LocalTime getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(String endtime) {
+    public void setEndtime(LocalTime endtime) {
         this.endtime = endtime;
     }
 
@@ -142,11 +133,11 @@ public class ExamSetup {
         this.course = course;
     }
 
-    public Date getStartdate() {
+    public LocalDateTime getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(Date startdate) {
+    public void setStartdate(LocalDateTime startdate) {
         this.startdate = startdate;
     }
 
@@ -168,5 +159,27 @@ public class ExamSetup {
 
     public void setExamID(ExamID examID) {
         this.examID = examID;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        ExamSetup examSetup = (ExamSetup) o;
+
+        return this.getCourse().getName().equals(examSetup.getCourse().getName()) && this.getStartdate().equals(examSetup.getStartdate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getCourse().getName());
     }
 }
