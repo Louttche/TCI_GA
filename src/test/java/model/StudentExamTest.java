@@ -17,6 +17,10 @@ import static org.mockito.Mockito.*;
 
 class StudentExamTest {
 
+    Student VALID_STUDENT = mock(Student.class);
+    ExamID VALID_EXAMID = mock(ExamID.class);
+    String VALID_CLASSCODE = "examName-123456";
+
     /**
      * @verifies throw a NullPointerException if student is null
      * @see StudentExam#StudentExam(Student, ExamID, String)
@@ -24,12 +28,9 @@ class StudentExamTest {
     @Test
     public void StudentExam_shouldThrowANullPointerExceptionIfStudentIsNull() throws Exception {
         // arrange / act
-        ExamID examID = mock(ExamID.class);
-        String classcode = "examName-123456";
-
         // assert
         assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
-            new StudentExam(null, examID, classcode);
+            new StudentExam(null, VALID_EXAMID, VALID_CLASSCODE);
         });
     }
 
@@ -40,12 +41,9 @@ class StudentExamTest {
     @Test
     public void StudentExam_shouldThrowANullPointerExceptionIfExamIDIsNull() throws Exception {
         // arrange / act
-        Student student = mock(Student.class);
-        String classcode = "examName-123456";
-
         // assert
         assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
-            new StudentExam(student, null, classcode);
+            new StudentExam(VALID_STUDENT, null, VALID_CLASSCODE);
         });
     }
 
@@ -56,12 +54,9 @@ class StudentExamTest {
     @Test
     public void StudentExam_shouldThrowANullPointerExceptionIfClasscodeIsNull() throws Exception {
         // arrange / act
-        Student student = mock(Student.class);
-        ExamID examID = mock(ExamID.class);
-
         // assert
         assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
-            new StudentExam(student, examID, null);
+            new StudentExam(VALID_STUDENT, VALID_EXAMID, null);
         });
     }
 }
