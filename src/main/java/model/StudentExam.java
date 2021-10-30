@@ -28,6 +28,13 @@ public class StudentExam {
      * @should throw a NullPointerException if classcode is null
      */
     public StudentExam(Student student, ExamID examID, String classcode){
+        if (student == null)
+            throw new NullPointerException("student cannot be null");
+        if (examID == null)
+            throw new NullPointerException("examID cannot be null");
+        if (classcode == null)
+            throw new NullPointerException("classcode cannot be null");
+
         this.student = student;
         this.exam = examID;
         this.classcode = classcode;
