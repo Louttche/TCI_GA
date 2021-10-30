@@ -17,18 +17,18 @@ import static org.mockito.Mockito.*;
 class ExamSetupTest {
 
     /**
-     * @verifies throw an IllegalDateException if begintime is not before endtime
+     * @verifies throw an IllegalArgumentException if begintime is not before endtime
      * @see ExamSetup#ExamSetup(Course, LocalDateTime, Integer, String, LocalTime, LocalTime, ExamID)
      */
     @Test
-    public void ExamSetup_shouldThrowAnIllegalDateExceptionIfBegintimeIsNotBeforeEndtime() throws Exception {
+    public void ExamSetup_shouldThrowAnIllegalArgumentExceptionIfBegintimeIsNotBeforeEndtime() throws Exception {
         // arrange
         Course course = mock(Course.class);
-        LocalDateTime startDate = LocalDateTime.now(); //mock(Date.class);
+        LocalDateTime startDate = LocalDateTime.now();
         int nrOfClasscodes = 2;
         String examName = "exam name example";
         LocalTime beginTime = LocalTime.now();
-        LocalTime endTime = beginTime.plus(2, ChronoUnit.HOURS);
+        LocalTime endTime = beginTime.minus(1, ChronoUnit.HOURS);
         ExamID examID = mock(ExamID.class);
 
         // assert
@@ -44,21 +44,20 @@ class ExamSetupTest {
     @Test
     public void ExamSetup_shouldSetTheExamnameToCourseNameIfItIsEmpty() throws Exception {
         // arrange
-        Course course = mock(Course.class);
-        String examName = "";
+        String courseName = "courseName";
+        Course course = mock(Course.class); //new Course(courseName, "ABC", 3);
         LocalDateTime startDate = LocalDateTime.now();
         LocalTime beginTime = LocalTime.now();
         LocalTime endTime = beginTime.plus(2, ChronoUnit.HOURS);
         int nrOfClasscodes = 2;
         ExamID examID = mock(ExamID.class);
 
-        ExamSetup es = new ExamSetup(course, startDate, nrOfClasscodes, examName, beginTime, endTime, examID);
-
         // act
-        when(es.getCourse().getName()).thenReturn("courseName");
+        when(course.getName()).thenReturn("courseName");
+        ExamSetup es = new ExamSetup(course, startDate, nrOfClasscodes, "", beginTime, endTime, examID);
 
         // assert
-        assertThat(es.getExamname()).isEqualTo("courseName");
+        assertThat(es.getExamname()).isEqualTo(courseName);
     }
 
     /**
@@ -157,8 +156,8 @@ class ExamSetupTest {
         LocalTime endTime = beginTime.plus(2, ChronoUnit.HOURS);
 
         // act
-        // pass some parameters as null to act like the exam has not been fully set up yet
-        ExamSetup es = new ExamSetup(course, startDate, nrOfClasscodes, examName, beginTime, null, null);
+        // pass last parameter as null to act like the exam has not been fully set up yet
+        ExamSetup es = new ExamSetup(course, startDate, nrOfClasscodes, examName, beginTime, endTime, null);
 
         // assert
         assertThatExceptionOfType(ExamNotFoundException.class).isThrownBy(() -> {
@@ -184,6 +183,7 @@ class ExamSetupTest {
         // act
         // starts exam now
         ExamSetup es = new ExamSetup(course, startDate, nrOfClasscodes, examName, beginTime, endTime, examID);
+
 
         // assert
         assertThatExceptionOfType(ExamStartedException.class).isThrownBy(() -> {

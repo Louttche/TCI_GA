@@ -1,9 +1,17 @@
 package model;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import services.exposed.ExamNotFoundException;
+import services.exposed.teacher.ExamStartedException;
+
+import static org.apache.commons.lang3.RandomStringUtils.*;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * An examsetup is related to a specific course. it is identified by the course it is related to, and the startdate.
@@ -35,10 +43,8 @@ public class ExamSetup {
     private Course course;
     private LocalDateTime startdate;
 
-    private Integer nrOfClasscodesToGenerate;
-
-    private List<String> classcodes;
-    private List<Integer> examcodes;
+    private List<String> classcodes = new ArrayList();
+    private List<Integer> examcodes = new ArrayList();;
 
     private String examname;
 
@@ -59,7 +65,7 @@ public class ExamSetup {
      * @param endtime
      * @param examID
      *
-     * @should throw an IllegalDateException if begintime is not before endtime
+     * @should throw an IllegalArgumentException if begintime is not before endtime
      * @should set the examname to course name if it is empty
      * @should not allow to change examname after exam has started
      * @should generate classcodes with valid size
@@ -70,10 +76,22 @@ public class ExamSetup {
     public ExamSetup(Course course, LocalDateTime startdate, Integer nrOfClasscodes, String examname, LocalTime begintime, LocalTime endtime, ExamID examID){
         this.course = course;
         this.startdate = startdate;
-        this.nrOfClasscodesToGenerate = nrOfClasscodes;
+
+        // The test for this does not work
+        if (examname == null || examname.isEmpty())
+            examname = this.getCourse().getName();
         this.examname = examname;
+        GenerateClasscodes(nrOfClasscodes);
+
+        if (begintime == null && endtime == null)
+            throw new IllegalArgumentException("end times are null");
+
+        if (begintime.isAfter(endtime))
+            throw new IllegalArgumentException("begin time cannot be after end time.");
+
         this.begintime = begintime;
         this.endtime = endtime;
+
         this.examID = examID;
     }
 
@@ -96,8 +114,18 @@ public class ExamSetup {
         return examID;
     }
 
-    public void setNrOfClasscodesToGenerate(Integer nrOfClasscodesToGenerate) {
-        this.nrOfClasscodesToGenerate = nrOfClasscodesToGenerate;
+    // the classcode consists of the name of the exam, followed by a '-', followed by a random string of 6 characters.
+    public void GenerateClasscodes(Integer nrOfClasscodes){
+        if (nrOfClasscodes == null || nrOfClasscodes < 2)
+            nrOfClasscodes = 2;
+
+        byte[] randomCharacters = new byte[6];
+
+        for (int i = 1; i <= nrOfClasscodes; i++){
+            // Generate random classcode
+            String classcode = this.examname + '-' + RandomStringUtils.randomAlphabetic(6);;
+            this.classcodes.add(classcode);
+        }
     }
 
     public String getExamname() {
@@ -106,7 +134,12 @@ public class ExamSetup {
 
     // it is not allowed to change the name, after the exam has started.
     public void setExamname(String examname) {
-        this.examname = examname;
+        try {
+            if (this.getBegintime().isBefore(LocalTime.now()))
+                this.examname = examname;
+        } catch (NullPointerException e){
+            ;
+        }
     }
 
     public LocalTime getBegintime() {
@@ -165,7 +198,13 @@ public class ExamSetup {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public void setMaterial(String material) throws ExamNotFoundException, ExamStartedException {
+        if (this.examID == null)
+            throw new ExamNotFoundException();
+
+        if (this.begintime.isBefore(LocalTime.now()))
+            throw new ExamStartedException();
+
         this.material = material;
     }
 
