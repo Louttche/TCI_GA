@@ -19,6 +19,3 @@ Katerina - Student, ExamSetup, StudentExam
 
 # Git Repo
 - https://git.fhict.nl/I375722/tci_ga
-
-=======
->>>>>>> Katerina
