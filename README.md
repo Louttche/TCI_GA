@@ -10,6 +10,7 @@ The tool consists of 2 parts:
 This assignment focusses on a part of the server-side code.
 
 ![UML Diagram](https://git.fhict.nl/I375722/tci_ga/blob/Katerina/TCI_GA_UML.png?raw=true)
+![C4 Model](https://git.fhict.nl/I375722/tci_ga/blob/Katerina/TCI_C4.png?raw=true)
 
 # Work Division
 
