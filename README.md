@@ -8,3 +8,7 @@ The tool consists of 2 parts:
 2 **Server-side software (the EFIT server)** students connect to it during exams, while using the EFIT client. It also provides teachers to possibility to create exams before the exam execution time and downloading exam work for grading. The server logs several items from the students’ computer during exams. Invigilators can see the status of students’ connection and log items during the exam. Removal of exam work and log items is done when exam results are finalized.
 
 This assignment focusses on a part of the server-side code.
+
+# Work Division
+
+Katerina - Student, ExamSetup, StudentExam
