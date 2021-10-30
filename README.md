@@ -15,3 +15,6 @@ This assignment focusses on a part of the server-side code.
 # Work Division
 
 Katerina - Student, ExamSetup, StudentExam
+
+# Git Repo
+- https://git.fhict.nl/I375722/tci_ga
