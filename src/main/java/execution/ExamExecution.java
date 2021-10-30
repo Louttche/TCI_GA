@@ -1,5 +1,12 @@
 package execution;
 
+import model.ExamID;
+import model.ExamSetup;
+import model.StudentExam;
+
+import java.sql.Time;
+import java.util.List;
+
 /**
  * an examexecution consists of the examsetup with all examstudents who logged in for the exam with all of their data.
  *
@@ -23,6 +30,18 @@ package execution;
  *
  */
 public class ExamExecution {
-    // TODO: the appropiate methods
+    // TODO: the appropriate methods
+    //private ExamSetup examsetup;
+    //private StudentExam examstudents; // Or Student?
+    //private List<StudentExam> studentexams;
 
+    //private Boolean status;
+
+    // Metadata
+    //private String examname;
+    //private int nrOfClasscodes; // ?
+    //private int nrOfStudents; // ? for each classcode
+    //private Time examduration; // ? per used classcode
+
+    //private ExamID examID;
 }

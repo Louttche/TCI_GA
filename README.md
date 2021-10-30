@@ -8,6 +8,7 @@ The tool consists of 2 parts:
 2 **Server-side software (the EFIT server)** students connect to it during exams, while using the EFIT client. It also provides teachers to possibility to create exams before the exam execution time and downloading exam work for grading. The server logs several items from the students’ computer during exams. Invigilators can see the status of students’ connection and log items during the exam. Removal of exam work and log items is done when exam results are finalized.
 
 This assignment focusses on a part of the server-side code.
+<<<<<<< HEAD
 
 ![UML Diagram](https://git.fhict.nl/I375722/tci_ga/blob/Katerina/TCI_GA_UML.png?raw=true)
 ![C4 Model](https://git.fhict.nl/I375722/tci_ga/blob/Katerina/TCI_C4.png?raw=true)
@@ -18,3 +19,5 @@ Katerina - Student, ExamSetup, StudentExam
 
 # Git Repo
 - https://git.fhict.nl/I375722/tci_ga
+=======
+>>>>>>> Katerina
