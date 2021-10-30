@@ -74,8 +74,8 @@ public class ExamSetup {
      * @should throw an ExamStartedException when exam materials are added after exam starts
      */
     public ExamSetup(Course course, LocalDateTime startdate, Integer nrOfClasscodes, String examname, LocalTime begintime, LocalTime endtime, ExamID examID){
-        this.course = course;
         this.startdate = startdate;
+        this.course = course;
 
         // The test for this does not work
         if (examname == null || examname.isEmpty())
@@ -95,14 +95,6 @@ public class ExamSetup {
         this.examID = examID;
     }
 
-    /*  it is assumed the randomness creates unique codes.
-    *   two extra classcodes are always generated for extra safety (this means extra classcodes are always added).
-    *   the name of the extra classcodes are the name of the exam, followed by '-extra-', followed by a random string of 4 characters.
-    */
-    private List<String> GenerateClassCodes(int amount){
-        return null;
-    }
-
     /*
      * a list of all examcodes can be generated.
      */
@@ -114,7 +106,11 @@ public class ExamSetup {
         return examID;
     }
 
-    // the classcode consists of the name of the exam, followed by a '-', followed by a random string of 6 characters.
+    /*  it is assumed the randomness creates unique codes.
+     *  the classcode consists of the name of the exam, followed by a '-', followed by a random string of 6 characters.
+     *  two extra classcodes are always generated for extra safety (this means extra classcodes are always added).
+     *  the name of the extra classcodes are the name of the exam, followed by '-extra-', followed by a random string of 4 characters.
+     */
     public void GenerateClasscodes(Integer nrOfClasscodes){
         if (nrOfClasscodes == null || nrOfClasscodes < 2)
             nrOfClasscodes = 2;
@@ -126,6 +122,12 @@ public class ExamSetup {
             String classcode = this.examname + '-' + RandomStringUtils.randomAlphabetic(6);;
             this.classcodes.add(classcode);
         }
+
+        // Add the extra classcodes
+        for (int i_extra = 1; i_extra <= 2; i_extra++){
+            String classcode = this.examname + '-' + RandomStringUtils.randomAlphabetic(4);;
+            this.classcodes.add(classcode);
+        }
     }
 
     public String getExamname() {
@@ -135,7 +137,7 @@ public class ExamSetup {
     // it is not allowed to change the name, after the exam has started.
     public void setExamname(String examname) {
         try {
-            if (this.getBegintime().isBefore(LocalTime.now()))
+            if (this.begintime.isAfter(LocalTime.now()))
                 this.examname = examname;
         } catch (NullPointerException e){
             ;
